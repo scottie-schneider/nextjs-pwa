@@ -13,7 +13,7 @@ app.prepare()
   createServer((req, res) => {
     const parsedUrl = parse(req.url, true)
     const { pathname } = parsedUrl
-
+    // this is required to ensure the service worker is served
     if (pathname === '/service-worker.js') {
       const filePath = join(__dirname, '.next', pathname)
       app.serveStatic(req, res, filePath)
