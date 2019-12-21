@@ -16,6 +16,7 @@
   "author": "Aerolab <hey@aerolab.co>",
   "license": "MIT",
   "dependencies": {
+    "express": "^4.17.1",
     "isomorphic-fetch": "^2.2.1",
     "next": "^9.1.6",
     "react": "^16.12.0",
