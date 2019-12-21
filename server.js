@@ -45,11 +45,10 @@ app.prepare().then(() => {
   const server = express()
 
   server.get('/a', (req, res) => {
-    return app.render(req, res, '/a', req.query)
-  })
-
-  server.get('/b', (req, res) => {
-    return app.render(req, res, '/b', req.query)
+    res.setHeader('Content-Type', 'application/json')
+    res.statusCode = 200
+    res.end(JSON.stringify({ name: 'From Express Server' }))
+    return 
   })
 
   server.get('/posts/:id', (req, res) => {
