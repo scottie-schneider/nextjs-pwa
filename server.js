@@ -1,3 +1,34 @@
+// Below code works for example, but doesn't use express
+// const { createServer } = require('http')
+// const { join } = require('path')
+// const { parse } = require('url')
+// const next = require('next')
+
+// const port = parseInt(process.env.PORT, 10) || 3000
+// const dev = process.env.NODE_ENV !== 'production'
+// const app = next({ dev })
+// const handle = app.getRequestHandler()
+
+// app.prepare()
+// .then(() => {
+//   createServer((req, res) => {
+//     const parsedUrl = parse(req.url, true)
+//     const { pathname } = parsedUrl
+//     // this is required to ensure the service worker is served
+//     if (pathname === '/service-worker.js') {
+//       const filePath = join(__dirname, '.next', pathname)
+//       app.serveStatic(req, res, filePath)
+//     } else {
+//       handle(req, res, parsedUrl)
+//     }
+//   })
+//   .listen(port, (err) => {
+//     if (err) throw err
+//     console.log(`> Ready on http://localhost:${port}`)
+//   })
+// })
+
+
 // Custom Express Server
 const express = require('express')
 const next = require('next')
@@ -25,18 +56,17 @@ app.prepare().then(() => {
   })
 
   server.all('*', (req, res) => {
-    console.log('catching all')
     const parsedUrl = parse(req.url, true)
     const { pathname } = parsedUrl
     // this is required to ensure the service worker is served
     if (pathname === '/service-worker.js') {
-      console.log('SERVING THE SERVICE WORKER')
       const filePath = join(__dirname, '.next', pathname)
-      app.serveStatic(req, res, 'http://localhost:3000/static/service-worker.js')
+      app.serveStatic(req, res, filePath)
       return 
     } else {
       return handle(req, res, parsedUrl)
-    }    
+    }
+    // return handle(req, res)
   })
 
   server.listen(port, err => {

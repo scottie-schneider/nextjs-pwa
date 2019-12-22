@@ -19,7 +19,7 @@ nextApp.prepare().then(() => {
         const { pathname } = parsedUrl
         console.log('getting sw!')
         const filePath = join(__dirname, '.next', pathname)
-        nextApp.serveStatic(req, res, filePath)        
+        return nextApp.serveStatic(req, res, filePath)        
     })
     app.get("*", (req, res) => {
         console.log(`URL requested: ${req.url}`);
