@@ -17,18 +17,20 @@ const { parse } = require('url')
 const port = parseInt(process.env.PORT, 10) || 3000
 
 nextApp.prepare().then(() => {
-    app.get('/a', (req, res) => {
+    const appServer = express();
+    appServer.get('/a', (req, res) => {
         res.setHeader('Content-Type', 'application/json')
         res.statusCode = 200
         res.end(JSON.stringify({ name: 'From Express Server' }))
         return 
       })
-    server.get("*", (req, res) => {
+    appServer.all("*", (req, res) => {
         console.log(`URL requested: ${req.url}`);
         const parsedUrl = parse(req.url, true)
         const { pathname } = parsedUrl
         // this is required to ensure the service worker is served
         if (pathname === '/service-worker.js') {
+        console.log('getting sw!')
         const filePath = join(__dirname, '.next', pathname)
         nextApp.serveStatic(req, res, filePath)
         return 
@@ -37,7 +39,7 @@ nextApp.prepare().then(() => {
         }    
     })
 
-    server.listen(port, err => {
+    appServer.listen(port, err => {
         if (err) throw err;
         console.log(`Server listening on port ${port}`);
     })
