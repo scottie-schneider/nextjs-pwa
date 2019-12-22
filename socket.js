@@ -14,15 +14,15 @@ const nextHandler = nextApp.getRequestHandler();
 const port = parseInt(process.env.PORT, 10) || 3000
 
 nextApp.prepare().then(() => {
-    app.get("*", (req, res) => {
-        console.log(`URL requested: ${req.url}`);
-        return nextHandler(req, res);
-    })
     app.get('/service-worker', (req, res) => {
         console.log('getting sw!')
         const filePath = join(__dirname, '.next', pathname)
         nextApp.serveStatic(req, res, filePath)        
     })
+    app.get("*", (req, res) => {
+        console.log(`URL requested: ${req.url}`);
+        return nextHandler(req, res);
+    })    
     server.listen(port, err => {
         if (err) throw err;
         console.log(`Server listening on port ${port}`);
