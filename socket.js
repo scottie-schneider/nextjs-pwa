@@ -15,6 +15,8 @@ const port = parseInt(process.env.PORT, 10) || 3000
 
 nextApp.prepare().then(() => {
     app.get('/service-worker', (req, res) => {
+        const parsedUrl = parse(req.url, true)
+        const { pathname } = parsedUrl
         console.log('getting sw!')
         const filePath = join(__dirname, '.next', pathname)
         nextApp.serveStatic(req, res, filePath)        
