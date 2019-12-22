@@ -14,6 +14,16 @@ class DisplayAnswers extends Component {
     };
 
     componentDidMount() {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker
+              .register('/service-worker.js')
+              .then(registration => {
+                console.log('service worker registration successful')
+              })
+              .catch(err => {
+                console.warn('service worker registration failed', err.message)
+              })
+          }  
         this.props.socket.on('answer', num => {
             if (num === 1) {
                 this.setState(currState => ({answers1: currState.answers1+1}));
