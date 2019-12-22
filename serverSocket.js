@@ -23,7 +23,7 @@ nextApp.prepare().then(() => {
         res.end(JSON.stringify({ name: 'From Express Server' }))
         return 
       })
-    app.get("*", (req, res) => {
+    server.get("*", (req, res) => {
         console.log(`URL requested: ${req.url}`);
         const parsedUrl = parse(req.url, true)
         const { pathname } = parsedUrl
