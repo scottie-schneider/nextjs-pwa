@@ -17,6 +17,12 @@ const { parse } = require('url')
 const port = parseInt(process.env.PORT, 10) || 3000
 
 nextApp.prepare().then(() => {
+    app.get('/custom', (req, res) => {
+        res.setHeader('Content-Type', 'application/json')
+        res.statusCode = 200
+        res.end(JSON.stringify({ name: 'Custom route From Express Server' }))
+        return 
+      })
     app.all("*", (req, res) => {        
         const parsedUrl = parse(req.url, true)
         const { pathname } = parsedUrl
