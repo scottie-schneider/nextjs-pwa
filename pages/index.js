@@ -27,18 +27,7 @@ export default class extends React.Component {
   }
 
   componentDidMount () {
-    // one example 
-    this.socket = io();
-    this.socket.on('now', data => {
-      this.setState({
-        hello: data.message,
-        messages: this.props.messages,
-      })
-    })
-    // another example 
-      this.socket = io('http://localhost:3000')
-      this.socket.on('message', this.handleMessage)
-    console.log('we got a connection client side')
+    
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
         .register('/service-worker.js')
