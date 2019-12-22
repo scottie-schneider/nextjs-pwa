@@ -1,3 +1,34 @@
+// Below code works for example, but doesn't use express
+// const { createServer } = require('http')
+// const { join } = require('path')
+// const { parse } = require('url')
+// const next = require('next')
+
+// const port = parseInt(process.env.PORT, 10) || 3000
+// const dev = process.env.NODE_ENV !== 'production'
+// const app = next({ dev })
+// const handle = app.getRequestHandler()
+
+// app.prepare()
+// .then(() => {
+//   createServer((req, res) => {
+//     const parsedUrl = parse(req.url, true)
+//     const { pathname } = parsedUrl
+//     // this is required to ensure the service worker is served
+//     if (pathname === '/service-worker.js') {
+//       const filePath = join(__dirname, '.next', pathname)
+//       app.serveStatic(req, res, filePath)
+//     } else {
+//       handle(req, res, parsedUrl)
+//     }
+//   })
+//   .listen(port, (err) => {
+//     if (err) throw err
+//     console.log(`> Ready on http://localhost:${port}`)
+//   })
+// })
+
+
 // Custom Express Server
 const express = require('express')
 const next = require('next')
@@ -7,20 +38,11 @@ const { parse } = require('url')
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
-// create the next app part 
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
 app.prepare().then(() => {
-  // create the express server 
   const server = express()
-  // wrap it with socket?
-  var http = require('http').createServer(server);
-  var io = require('socket.io')(http);
-
-  io.on('connection', function(socket){
-    console.log('a user connected');
-  });
 
   server.get('/a', (req, res) => {
     res.setHeader('Content-Type', 'application/json')
