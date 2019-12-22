@@ -13,7 +13,7 @@ const nextHandler = nextApp.getRequestHandler()
 // fake DB 
 const messages = []
 
-let port = 3000 || process.env.PORT 
+const port = parseInt(process.env.PORT, 10) || 3000 
 
 // socket.io server
 io.on('connection', socket => {
