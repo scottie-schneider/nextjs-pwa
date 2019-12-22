@@ -7,7 +7,7 @@ const app = express();
 const server = http.Server(app);
 const io = socketio(server);
 
-const dev = process.env.NODE_ENV !== "prodcution";
+const dev = process.env.NODE_ENV !== "production";
 const nextApp = next({dev});
 const nextHandler = nextApp.getRequestHandler();
 
@@ -18,20 +18,26 @@ const port = parseInt(process.env.PORT, 10) || 3000
 
 nextApp.prepare().then(() => {
     app.get('/a', (req, res) => {
+        console.log('getting "a" route')
         res.setHeader('Content-Type', 'application/json')
         res.statusCode = 200
-        res.end(JSON.stringify({ name: 'From Express Server' }))
+        res.end(JSON.stringify({ name: 'From Express Server in server.js' }))
         return 
       })
-    app.all("*", (req, res) => {
-        console.log(`URL requested: ${req.url}`);
+    app.get('/service-worker', (req, res) => {
+        console.log('getting sw!')
+        const filePath = join(__dirname, '.next', pathname)
+        nextApp.serveStatic(req, res, filePath)        
+    })
+    app.all("*", (req, res) => {        
         const parsedUrl = parse(req.url, true)
         const { pathname } = parsedUrl
+        console.log(`pathname is ${pathname}`)
         // this is required to ensure the service worker is served
         if (pathname === '/service-worker.js') {
         console.log('getting sw!')
         const filePath = join(__dirname, '.next', pathname)
-        nextApp.serveStatic(req, res, filePath)
+        nextApp.serveStatic(req, res, filePath)        
         return 
         } else {
         return nextHandler(req, res, parsedUrl)

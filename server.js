@@ -25,12 +25,14 @@ app.prepare().then(() => {
   })
 
   server.all('*', (req, res) => {
+    console.log('catching all')
     const parsedUrl = parse(req.url, true)
     const { pathname } = parsedUrl
     // this is required to ensure the service worker is served
     if (pathname === '/service-worker.js') {
+      console.log('SERVING THE SERVICE WORKER')
       const filePath = join(__dirname, '.next', pathname)
-      app.serveStatic(req, res, filePath)
+      app.serveStatic(req, res, 'http://localhost:3000/static/service-worker.js')
       return 
     } else {
       return handle(req, res, parsedUrl)
