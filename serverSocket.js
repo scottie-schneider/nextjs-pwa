@@ -1,7 +1,7 @@
 const express = require("express");
+const next = require("next");
 const http = require("http");
 const socketio = require("socket.io");
-const next = require("next");
 
 const app = express();
 const server = http.Server(app);
@@ -17,14 +17,13 @@ const { parse } = require('url')
 const port = parseInt(process.env.PORT, 10) || 3000
 
 nextApp.prepare().then(() => {
-    const appServer = express();
-    appServer.get('/a', (req, res) => {
+    app.get('/a', (req, res) => {
         res.setHeader('Content-Type', 'application/json')
         res.statusCode = 200
         res.end(JSON.stringify({ name: 'From Express Server' }))
         return 
       })
-    appServer.all("*", (req, res) => {
+    app.all("*", (req, res) => {
         console.log(`URL requested: ${req.url}`);
         const parsedUrl = parse(req.url, true)
         const { pathname } = parsedUrl
@@ -39,7 +38,7 @@ nextApp.prepare().then(() => {
         }    
     })
 
-    appServer.listen(port, err => {
+    app.listen(port, err => {
         if (err) throw err;
         console.log(`Server listening on port ${port}`);
     })
