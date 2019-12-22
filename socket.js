@@ -11,6 +11,9 @@ const dev = process.env.NODE_ENV !== "production";
 const nextApp = next({dev});
 const nextHandler = nextApp.getRequestHandler();
 
+const { join } = require('path')
+const { parse } = require('url')
+
 const port = parseInt(process.env.PORT, 10) || 3000
 
 nextApp.prepare().then(() => {
