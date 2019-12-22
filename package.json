@@ -4,8 +4,8 @@
   "description": "A Hacker News Reader built using Next.JS",
   "main": "server.js",
   "scripts": {
-    "dev": "node serverSocket.js",
-    "start": "NODE_ENV=production node serverSocket.js",
+    "dev": "node socket.js",
+    "start": "NODE_ENV=production node socket.js",
     "build": "next build"
   },
   "keywords": [

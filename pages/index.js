@@ -39,11 +39,6 @@ export default class extends React.Component {
         })
     }    
   }
-  // close socket connection
-  componentWillUnmount() {
-    this.socket.off('message', this.handleMessage)
-    this.socket.close()
-  }
   render() {
     const { stories, page } = this.props
 
