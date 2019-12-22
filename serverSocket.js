@@ -14,7 +14,7 @@ const nextHandler = nextApp.getRequestHandler();
 const { join } = require('path')
 const { parse } = require('url')
 
-let port = 3000;
+const port = parseInt(process.env.PORT, 10) || 3000
 
 nextApp.prepare().then(() => {
     app.get('/a', (req, res) => {
