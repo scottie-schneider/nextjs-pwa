@@ -34,8 +34,7 @@ app.prepare().then(() => {
       return 
     } else {
       return handle(req, res, parsedUrl)
-    }
-    // return handle(req, res)
+    }    
   })
 
   server.listen(port, err => {
