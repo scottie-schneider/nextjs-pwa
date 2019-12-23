@@ -23,6 +23,7 @@ nextApp.prepare().then(() => {
         res.end(JSON.stringify({ name: 'Custom route From Express Server' }))
         return 
       })
+    // catch all for routes not explicitly assigned above 
     app.all("*", (req, res) => {        
         const parsedUrl = parse(req.url, true)
         const { pathname } = parsedUrl
@@ -34,6 +35,7 @@ nextApp.prepare().then(() => {
         nextApp.serveStatic(req, res, filePath)        
         return 
         } else {
+        // if we've gotten this far, then nextjs should serve up a page
         return nextHandler(req, res, parsedUrl)
         }    
     })   
