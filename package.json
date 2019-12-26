@@ -16,6 +16,7 @@
   "author": "Scottie Schneider",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "google-map-react": "^1.1.5",
     "isomorphic-fetch": "^2.2.1",
