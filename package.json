@@ -1,7 +1,7 @@
 {
   "name": "pwa-nextjs",
   "version": "1.0.0",
-  "description": "A Hacker News Reader built using Next.JS",
+  "description": "Example NextJS PWA with Socket.io",
   "main": "server.js",
   "scripts": {
     "dev": "node socket.js",
@@ -13,7 +13,7 @@
     "pwa",
     "nextjs"
   ],
-  "author": "Aerolab <hey@aerolab.co>",
+  "author": "Scottie Schneider",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
