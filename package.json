@@ -4,8 +4,8 @@
   "description": "Example NextJS PWA with Socket.io",
   "main": "server.js",
   "scripts": {
-    "dev": "node server/app.js",
-    "start": "NODE_ENV=production node server/app.js",
+    "dev": "node server/socket.js",
+    "start": "NODE_ENV=production node server/socket.js",
     "build": "next build"
   },
   "keywords": [
