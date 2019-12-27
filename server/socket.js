@@ -149,6 +149,7 @@ nextApp.prepare().then(() => {
       if (pathname === '/service-worker.js') {
         console.log('getting sw!')
         const filePath = join(__dirname, '.next', pathname)
+        console.log(filePath)
         nextApp.serveStatic(req, res, filePath)        
         return 
       } else {
