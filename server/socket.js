@@ -148,13 +148,12 @@ nextApp.prepare().then(() => {
       // this is required to ensure the service worker is served
       if (pathname === '/service-worker.js') {
         console.log('getting sw!')
-        const filePath = join(__dirname, '.next', pathname)
-        console.log(filePath)
-        nextApp.serveStatic(req, res, filePath)        
-        return 
+        const filePath = join('/app/.next', pathname)
+        console.log(`file path is ${filePath}`)
+        nextApp.serveStatic(req, res, filePath)                
       } else {
         // if we've gotten this far, then nextjs should serve up a page
-        return nextHandler(req, res, parsedUrl)
+        nextHandler(req, res, parsedUrl)
       }    
     })   
 
