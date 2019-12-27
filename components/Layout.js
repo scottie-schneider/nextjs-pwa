@@ -9,7 +9,7 @@ export default class Layout extends React.PureComponent {
     return <div>
       <Head>
         <title>{ title }</title>
-        <meta name="description" content={ description } />
+        {/* <meta name="description" content={ description } />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link rel="manifest" href="/static/manifest.webmanifest" />
@@ -20,7 +20,7 @@ export default class Layout extends React.PureComponent {
         <meta name="apple-mobile-web-app-title" content="Hacker News" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" /> */}
       </Head>
 
       <nav>

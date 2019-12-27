@@ -6,7 +6,9 @@ require("dotenv").config();
 module.exports = {  
   // step 2: declare the env variables in module exports
   env: {
-    GOOGLE_MAPS: process.env.GOOGLE_MAPS
+    GOOGLE_MAPS: process.env.GOOGLE_MAPS,
+    MONGO_URI: process.env.MONGO_URI,
+    SESSION_SECRET: process.env.SESSION_SECRET
   },
   webpack: (config) => {    
     config.plugins.push(
