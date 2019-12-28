@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "node server/socket.js",
     "start": "NODE_ENV=production node server/socket.js",
-    "build": "next build"
+    "build": "next build",
+    "heroku-postbuild": "next build"
   },
   "keywords": [
     "aerolab",

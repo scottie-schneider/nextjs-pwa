@@ -1,4 +1,5 @@
 import App, { Container } from 'next/app';
+import Navbar from '../components/Navbar'
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -11,10 +12,11 @@ class MyApp extends App {
     return { pageProps };
   }
   render() {
-    const { Component, apollo, pageProps } = this.props;
+    const { Component, pageProps } = this.props;
 
     return (
       <Container>
+        <Navbar {...this.props} />
         <Component {...pageProps} />
       </Container>
     );

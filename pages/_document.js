@@ -9,12 +9,14 @@ class MyDocument extends NextDocument {
   static async getInitialProps (ctx) {
     const styledComponentSheet = new StyledComponentSheets()
     const originalRenderPage = ctx.renderPage
-
+    let pageContext;
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: App => props =>
-            styledComponentSheet.collectStyles(<App {...props} />),
+          enhanceApp: App => props => {
+            pageContext = props.pageContext;
+            return styledComponentSheet.collectStyles(<App {...props} />)
+          }          
         })
 
       const initialProps = await NextDocument.getInitialProps(ctx)

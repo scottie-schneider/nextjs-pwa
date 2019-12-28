@@ -5,6 +5,7 @@ import Error from 'next/error'
 import Link from 'next/link'
 import Head from 'next/head';
 
+
 // socket stuff
 import io from 'socket.io-client'
 
@@ -25,7 +26,7 @@ export default class extends React.Component {
 
     return { stories, page }
   }
-
+  
   componentDidMount () {
     
     if ('serviceWorker' in navigator) {
@@ -49,7 +50,7 @@ export default class extends React.Component {
         <h1>{this.state.hello}</h1>
         <Layout title={'Hacker News Reader'} 
             description={'A sample PWA built with React and Next.JS'}>
-      <StoryList stories={stories} />
+        <StoryList stories={stories} />
 
       <footer>
         <Link href={`/?page=${page+1}`} ><a>Next Page &gt;</a></Link>
