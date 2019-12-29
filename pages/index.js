@@ -1,9 +1,14 @@
-import { authInitialProps } from "../lib/auth";
+// useEffect is the hook version of ComponentDidMount, which we're using to register our service worker.
+// https://medium.com/@felippenardi/how-to-do-componentdidmount-with-react-hooks-553ba39d1571 
 import React, { useState, useEffect } from "react";
+// these are our authentication functions, which take care of grabbing the user object from either the server
+// or the client (where we store it on the window)
 import { getSessionFromClient, getSessionFromServer, redirectUser } from '../lib/auth'
 
 import Layout from '../components/Layout';
 import StoryList from '../components/StoryList'
+
+require('isomorphic-fetch');
 
 const Index = ({ classes, auth, stories }) => {
   useEffect(() => {
