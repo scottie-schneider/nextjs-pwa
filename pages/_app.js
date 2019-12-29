@@ -1,5 +1,7 @@
 import App, { Container } from 'next/app';
-import Navbar from '../components/Navbar'
+// import Navbar from '../components/Navbar'
+import NavBarAuth from '../components/NavBarAuth'
+import Page from '../components/Page'
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -16,8 +18,10 @@ class MyApp extends App {
 
     return (
       <Container>
-        <Navbar {...this.props} />
-        <Component {...pageProps} />
+        <NavBarAuth {...this.props}/>
+        <Page {...this.props}>
+          <Component {...pageProps} />          
+        </Page>        
       </Container>
     );
   }

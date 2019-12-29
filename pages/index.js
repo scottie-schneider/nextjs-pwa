@@ -1,34 +1,9 @@
-import 'isomorphic-fetch'
-import Layout from '../components/Layout'
-import StoryList from '../components/StoryList'
-import Error from 'next/error'
-import Link from 'next/link'
-import Head from 'next/head';
+import { authInitialProps } from "../lib/auth";
+import React, { useState, useEffect } from "react";
 
 
-// socket stuff
-import io from 'socket.io-client'
-
-export default class extends React.Component {
-  state = {
-    hello: '',
-  }
-  static async getInitialProps({ req, res, query }) {
-    var stories, page;
-
-    try {
-      page = parseInt(query.page || 1)
-      const req = await fetch(`https://node-hnapi.herokuapp.com/news?page=${page}`)
-      stories = await req.json()
-    } catch(e) {
-      stories = undefined
-    }
-
-    return { stories, page }
-  }
-  
-  componentDidMount () {
-    
+const Index = ({ classes, auth }) => {
+  useEffect(() => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
         .register('/service-worker.js')
@@ -39,37 +14,27 @@ export default class extends React.Component {
           console.warn('service worker registration failed', err.message)
         })
     }    
-  }
-  render() {
-    const { stories, page } = this.props
-
-    if( typeof stories === 'undefined' || ! stories ) return <Error statusCode={503} />
-
-    return (
-      <div>
-        <h1>{this.state.hello}</h1>
-        <Layout title={'Hacker News Reader'} 
-            description={'A sample PWA built with React and Next.JS'}>
-        <StoryList stories={stories} />
-
-      <footer>
-        <Link href={`/?page=${page+1}`} ><a>Next Page &gt;</a></Link>
-      </footer>
-
-      <style jsx>{`
-        footer {
-          padding: 2em 1em;
-        }
-        footer a {
-          font-size: 1.5em;
-          font-weight: bold;
-          color: #ff6600;
-          text-decoration: none;
-        }
-      `}</style>
-    </Layout>
-      </div>
-    )      
-  }
-
+  })
+  return (
+    <main >
+      {auth.user && auth.user._id ? (
+        // Auth User Page
+        <div>
+          Auth user page
+        </div>
+      ) : (
+        // Splash Page (UnAuth Page)
+        <div>
+          Un Auth page, splash page
+        </div>
+      )}
+    </main>
+  )
 }
+// Issues
+// 1 - use a hook to get the data for the stories 
+// 2 - ensure you're mounting the service worker (used component did mount)
+
+Index.getInitialProps = authInitialProps();
+
+export default Index;
