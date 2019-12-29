@@ -11,7 +11,18 @@ class Signup extends React.Component {
     success: "",
     isLoading: false,
   };
-
+  componentDidMount () {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/service-worker.js')
+        .then(registration => {
+          console.log('service worker registration successful')
+        })
+        .catch(err => {
+          console.warn('service worker registration failed', err.message)
+        })
+    }    
+  }
   handleChange = (event) => {
     this.setState({ [event.target.name] : event.target.value })
   }

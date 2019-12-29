@@ -4,7 +4,6 @@ import StoryList from '../components/StoryList'
 import Error from 'next/error'
 import Link from 'next/link'
 import Head from 'next/head';
-import cookie from 'cookie'
 // socket stuff
 import io from 'socket.io-client'
 import { authInitialProps } from '../lib/auth'
@@ -28,7 +27,6 @@ export default class extends React.Component {
   }
   
   componentDidMount () {
-    
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
         .register('/service-worker.js')
