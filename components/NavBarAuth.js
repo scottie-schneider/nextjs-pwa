@@ -1,21 +1,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import NProgress from 'nprogress';
 import Router from 'next/router';
 import { authInitialProps } from '../lib/auth'
-// changing for demo
-Router.onRouteChangeStart = () => {
-  console.log('starting')
-  NProgress.start();
-};
-Router.onRouteChangeComplete = () => {
-  console.log('done')
-  NProgress.done();
-};
-
-Router.onRouteChangeError = () => {
-  NProgress.done();
-};
 
 const PortfolioNavStyle = styled.div`
   .header-portfolio-nav {
