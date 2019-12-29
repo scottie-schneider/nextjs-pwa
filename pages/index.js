@@ -24,10 +24,12 @@ const Index = ({ classes, auth, stories }) => {
         // Auth User Page
         <div>
           Auth user page
-          <Layout title={'Hacker News Reader'} 
-          description={'A sample PWA built with React and Next.JS'}>
-            <StoryList stories={stories} />
-          </Layout>
+          {
+            stories && <Layout title={'Hacker News Reader'} 
+            description={'A sample PWA built with React and Next.JS'}>
+              <StoryList stories={stories} />
+            </Layout>
+          }
         </div>
       ) : (
         // Splash Page (UnAuth Page)
